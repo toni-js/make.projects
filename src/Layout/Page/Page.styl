@@ -1,0 +1,23 @@
+body, html, *
+  margin 0
+  padding 0
+
+body
+  width 100%
+
+ul 
+  list-style none
+
+.main-container
+  display grid
+  grid-template-areas: 
+  "header"\
+  "content"\
+  "footer"
+  grid-template-columns 100%
+  & > header 
+    grid-area header
+  & > main
+    grid-area content
+  & > footer
+    grid-area footer

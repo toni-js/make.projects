@@ -1,0 +1,35 @@
+[
+  {
+    "name": "file-loader",
+    "description": "webpack plugin for load files direct for folder",
+    "command": [
+      "yarn add -D file-loader",
+      "npm install --save-dev file-loader"
+    ],
+    "config": {
+      "test": "/.(woff(2)?|ttf|eot|png|jpg|gif)(?v=d+.d+.d+)?$/",
+        "use": [
+          {
+            "loader": "file-loader",
+            "options": {
+              "name": "[name].[ext]",
+              "outputPath": "assets/"
+            }
+          }
+        ]
+    }
+  },
+  {
+    "name": "stylus",
+    "description": "webpack plugin for render css with stylus",
+    "command":  [
+      "yarn add -D style-loader css-loader stylus stylus-loader",
+      "npm install --save-dev stylus style-loader css-loader stylus-loader"
+    ],
+    "config": {
+      "test": "/.(styl|stylus)$/",
+      "loader": "style-loader!css-loader!stylus-loader"
+    }
+  }
+
+]
