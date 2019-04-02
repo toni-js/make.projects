@@ -2,12 +2,54 @@ import { createStore, applyMiddleware, Store } from 'redux'
 import { ReducerStore } from '../Reducers'
 import { createLogger } from 'redux-logger'
 import { makeProjects } from '../Reducers/MakeProjects';
-
+export type Environment = 'Rural' | 'Urbano' | 'Área legalmente protegida' | 'Corredor ecológico' | 'Águas costeiras ou marinhas' | 'Águas fluviais ou lacustres' | 'Áreas insulares (ilhas)'
+export type TypesOfEnvironments = Array<Environment>
+export const listOfEnvironments:TypesOfEnvironments = ['Rural','Urbano','Área legalmente protegida','Corredor ecológico','Águas costeiras ou marinhas','Águas fluviais ou lacustres','Áreas insulares (ilhas)']
+export const mapDetailsToEnvironments: { [ key: string ]: Array<string> } = {
+  ['Rural']: ['Terras Públicas (área degradada)', 'Terras Públicas (assentamento)', 'Terras Privadas (pastagem)', 'Terras Privadas (lavoura)', 'Terras Privadas (mineração)', 'Terras Privadas (área degradada)', 'Terras Privadas (reflorestamento)', 'Terras Privadas (floresta natural)'],
+  ['Urbano']: ['Densamente Urbanizado', 'Região Periférica (baixa urbanização)'],
+  ['Área legalmente protegida']: ['Unidade de CIbservação', 'Terra Indígena', 'Área de Preservação Permanente', 'Reserva Legal', 'Estação Ecológica', 'Reserva Biológica', 'Parque Nacional', 'Monumento Natural', 'Refúgio da Vida Silvestre', 'Área de Proteção Ambiental', 'Área de Relevante Interesse Ecológico', 'Floresta Nacional', 'Reserva Extrativista', 'Reserva de Fauna', 'Reserva de Desenvolvimento Sustentável', 'Reserva Particular do Patrimônio Natural'],
+  ['Corredor ecológico']: ['Corredor ecológico'],
+  ['Águas costeiras ou marinhas']: ['Águas costeiras ou marinhas'],
+  ['Águas fluviais ou lacustres']: ['Águas fluviais ou lacustres'],
+  ['Áreas insulares (ilhas)']: ['Áreas insulares (ilhas)']
+}
 export type CoreTheme = 'Água e Floresta' | 'Gestão Pesqueira Compartilhada' | 'Manejo e Conservação da Biodiversidade' | 'Planejamento e Gestão Territorial' | 'Qualidade Ambiental' | 'Sociedades Sustentáveis'
 export type FederationUnity = 'AC' | 'AL' | 'AM' | 'AP' | 'BA' | 'CE' | 'DF' | 'ES' | 'GO' | 'MA' | 'MG' | 'MS' | 'MT' | 'PA' | 'PB' | 'PE' | 'PI' | 'PR' | 'RJ' | 'RN' | 'RO' | 'RR' | 'RS' | 'SC' | 'SE' | 'SP' | 'TO'
 export type FederationUnityComplete = 'Acre' | 'Alagoas' | 'Amapá' | 'Amazonas' | 'Bahia' | 'Ceará' | 'Distrito Federal' | 'Espírito Santo' | 'Goiás' | 'Maranhão' | 'Mato Grosso' | 'Mato Grosso do Sul' | 'Minas Gerais' | 'Pará' | 'Paraíba' | 'Paraná' | 'Pernambuco' | 'Piauí' | 'Rio de Janeiro' | 'Rio Grande do Norte' | 'Rio Grande do Sul' | 'Rondônia' | 'Santa Catarina' | 'São Paulo' | 'Sergipe' | 'Tocantins'
+export const federationUnitysCompletes: Array<FederationUnityComplete> = ['Acre','Alagoas','Amapá','Amazonas','Bahia','Ceará','Distrito Federal','Espírito Santo','Goiás','Maranhão','Mato Grosso','Mato Grosso do Sul','Minas Gerais','Pará','Paraíba','Paraná','Pernambuco','Piauí','Rio de Janeiro','Rio Grande do Norte','Rio Grande do Sul','Rondônia','Santa Catarina','São Paulo','Sergipe','Tocantins']
+export const mapCountiesToFedetalUnitysComplete: {[ key: string ]: string[]} = {
+  ['Acre']: ['Acrelância', 'Assis Brasil', 'Brasiléia', 'Bujari', 'Capixaba', 'Cruzeiro do Sul', 'Epitaciolândia', 'Feijó', 'Jordão', 'Mâncio Lima', 'Manoel Urbano', 'Marechal Thaumaturgo', 'Plácido de Castro', 'Porto Acre', 'Porto Walter', 'Rio Branco', 'Rodrigues Alves', 'Santa Rosa do Purus', 'Sena Madureira', 'Senador Guiomard', 'Taraucá', 'Xapuri'],
+  ['Alagoas']: ['Água Branca','Anadia','Arapiraca','Atalaia','Barra de Santo Antônio','Barra de São Miguel','Batalha','Belém','Belo Monte','Boca da Mata','Branquinha','Cacimbinhas','Cajueiro','Campestre','Campo Alegre','Campo Grande','Canapi','Capela','Carneiros','Chã Preta','Coité do Nóia','Colônia Leopoldina','Coqueiro Seco','Coruripe','Craíbas','Delmiro Gouveia','Dois Riachos','Estrela de Alagoas','Feira Grande','Feliz Deserto','Flexeiras','Girau do Ponciano','Ibateguara','Igaci','Igreja Nova','Inhapi','Jacaré Dos Homens','Jacuípe','Japaratinga','Jaramataia','Jequiá da Praia','Joaquim Gomes','Jundiá','Junqueiro','Lagoa da Canoa','Limoeiro de Anadia','Maceió','Major Isidoro','Maragogi','Maravilha','Marechal Deodoro','Maribondo','Mar Vermelho','Mata Grande','Matriz de Camaragibe','Messias','Minador do Negrão','Monteirópolis','Murici','Novo Lino','Olho D´água Das Flores','Olho D´água do Casado','Olho D´água Grande','Olivença','Ouro Branco','Palestina','Palmeira Dos Índios','Pão de Açúcar','Pariconha','Paripueira','Passo de Camaragibe','Paulo Jacinto','Penedo','Piaçabuçu','Pilar','Pindoba','Piranhas','Poço Das Trincheiras','Porto Calvo','Porto de Pedras','Porto Real do Colégio','Quebrangulo','Rio Largo','Roteiro','Santa Luzia do Norte','Santana do Ipanema','Santana do Mundaú','São Brás','São José da Laje','São José da Tapera','São Luís do Quitunde','São Miguel Dos Campos','São Miguel Dos Milagres','São Sebastião','Satuba','Senador Rui Palmeira','Tanque D´arca','Taquarana','Teotônio Vilela','Traipu','União Dos Palmares','Viçosa'],
+  ['Amapá']:[],
+  ['Amazonas']:[],
+  ['Bahia']:[],
+  ['Ceará']:[],
+  ['Distrito Federal']:[],
+  ['Espírito Santo']:[],
+  ['Goiás']:[],
+  ['Maranhão']:[],
+  ['Mato Grosso']:[],
+  ['Mato Grosso do Sul']:[],
+  ['Minas Gerais']:[],
+  ['Pará']:[],
+  ['Paraíba']:[],
+  ['Paraná']: [],
+  ['Pernambuco']: [],
+  ['Piauí']: [],
+  ['Rio de Janeiro']: [],
+  ['Rio Grande do Norte']: [],
+  ['Rio Grande do Sul']: [],
+  ['Rondônia']: [],
+  ['Santa Catarina']: [],
+  ['São Paulo']: [],
+  ['Sergipe']: [],
+  ['Tocantins']: [],
+}
 export type Ecosystem = 'Amazônia' | 'Caating' | 'Pampa' | 'Cerrado' | 'Mata Atlântica' | 'Pantanal' | 'Zona Costeira e Marinha'
+export const listOfEcosystems: Array<Ecosystem> = ['Amazônia', 'Caating', 'Cerrado', 'Mata Atlântica', 'Pampa', 'Pantanal', 'Zona Costeira e Marinha']
 export type Physiognomy = 'Banhados e áreas úmidas' | 'Caating arbórea' | 'Caatinga arbustiva' | 'Caatinga arbustiva-arbórea' | 'Campinarana' | 'Campo' | 'Campo cerrado' | 'Campo chaquento' | 'Campo gramíneo-lenhoso' | 'Campo limpo' | 'Campo salino' | 'Cerradão' | 'Campo sujo' | 'Cerrado senso estrito' | 'Chaco' | 'Costão rochoso' | 'Duna' | 'Estuário' | 'Falésia' | 'Floresta estacional chaquenha' | 'Floresta estacional decidual' | 'Floresta estacional semidecidual' | 'Floresta ombrófila aberta' | 'Floresta ombrófila densa' | 'Floresta ombrófila mista' | 'Lagoa costeira' | 'Manguezal' | 'Mar territorial' | 'Marisma' | 'Mata ciliar' | 'Praia arenosa' | 'Recife de coral' | 'Restinga' | 'Veredas' | 'Zona econômica exclusiva' | 'Área de tensão ecológica' | 'Formação pioneira' | 'Rios e lagos' | 'Savana' | 'Savana estépica' | 'Campo de altitude' | 'Campo rupeste' | 'Vegetação secundária' | 'Campo arbóreo aberto'
+export const listOfPhysiognomy: Array<Physiognomy> = ['Banhados e áreas úmidas','Caating arbórea','Caatinga arbustiva','Caatinga arbustiva-arbórea','Campinarana','Campo','Campo cerrado','Campo chaquento','Campo gramíneo-lenhoso','Campo limpo','Campo salino','Cerradão','Campo sujo','Cerrado senso estrito','Chaco','Costão rochoso','Duna','Estuário','Falésia','Floresta estacional chaquenha','Floresta estacional decidual','Floresta estacional semidecidual','Floresta ombrófila aberta','Floresta ombrófila densa','Floresta ombrófila mista','Lagoa costeira','Manguezal','Mar territorial','Marisma','Mata ciliar','Praia arenosa','Recife de coral','Restinga','Veredas','Zona econômica exclusiva','Área de tensão ecológica','Formação pioneira','Rios e lagos','Savana','Savana estépica','Campo de altitude','Campo rupeste','Vegetação secundária','Campo arbóreo aberto']
 export type HydrographicRegion = 'Amazônica' | 'Tocantins-Araguaia' | 'Paraguai' | 'Paraná' | 'São Francisco' | 'Uruguai' | 'Atlântico Nodeste Ocidental' | 'Atlântico Nordeste Oriental' | 'Paranaíba' | 'Atlântico Leste' | 'Atlântico Sudeste' | 'Atlântico Sul'
 export type TypeOfPopulation = 'Adolescentes' | 'Artesãos' | 'Assentados Rurais' | 'Catadores de Caranguejos' | 'Catadores de Materiais Recicláveis' | 'Crianças' | 'Extrativistas' | 'Indígenas' | 'Marisqueiros' | 'Moradores de Área da influência' | 'Moradores de Entrno de Unidade' | 'Ostreiros' | 'Pescadores' | 'Quilombolas' | 'Ribeirinhos' | 'Trabalhadores Rurais' | 'Universitários' | 'Outros'
 export type ExpenseElement = 'Diárias' | 'Material de Consumo' | 'Passagens/Despesas com Locomoção' | 'Outros Serviços de Terceiros - Pessoa Física' | 'Outros Serviços de Terceiros - Pessoa Jurídica' | 'Equipamentos/Material Permanente' | 'Obras e Instalações'
@@ -19,31 +61,33 @@ export type TypeOfDemand = 'Espontânea' | 'Induzida'
 export type TypeOfProject = 'Novo' | 'Complementação de projeto solicitada pelo FNMA'
 
 interface ProjectCharacterization_ProjectIdentification_Form_MakeProjects{
-  title: string,
-  typeOfDemand: TypeOfDemand,
-  coreTheme: CoreTheme,
-  projectNumber: string,
-  typeOfProject: TypeOfProject
+  title?: string,
+  typeOfDemand?: TypeOfDemand,
+  coreTheme?: CoreTheme,
+  projectNumber?: string,
+  typeOfProject?: TypeOfProject
 }
 interface GeographicLocation_ProjectIdentification_Form_MakeProjects{
-  typesOfEnvironments: string[],
-  details: string[],
-  federationUnity: Array<FederationUnityComplete>,
-  filter: string,
-  counties: string[],
-  places: string,
-  geographicalCoordinates: string
+  typesOfEnvironments?: TypesOfEnvironments,
+  details?: string[],
+  federationUnity?: Array<FederationUnityComplete>,
+  filter?: string,
+  counties?: string[],
+  places?: string,
+  geographicalCoordinates?: string
 }
+export interface GeographicLocation extends GeographicLocation_ProjectIdentification_Form_MakeProjects{}
 interface EnvironmentalCharacterization_ProjectIdentification_Form_MakeProjects{
-  ecosystems: Array<Ecosystem>
-  physiognomys: Array<{ecosystem: Ecosystem,physiognomy: Physiognomy}>,
-  hydrographicRegions: Array<HydrographicRegion>,
+  ecosystems?: Array<Ecosystem>
+  physiognomys?: Array<{ecosystem: Ecosystem,physiognomy: Physiognomy}>,
+  hydrographicRegions?: Array<HydrographicRegion>
 }
+export interface EnvironmentalCharacterization extends EnvironmentalCharacterization_ProjectIdentification_Form_MakeProjects{}
 interface ProjectSummary_ProjectIdentification_Form_MakeProjects{
-  projectSummary: string,
+  projectSummary?: string,
 }
 interface Clarifications_ProjectIdentification_Form_MakeProjects{
-  clarificationsOfTheInstitution: string
+  clarificationsOfTheInstitution?: string
 }
 interface ProjectIdentification_Form_MakeProjects {
   projectCharacterization: ProjectCharacterization_ProjectIdentification_Form_MakeProjects,
@@ -314,15 +358,14 @@ export interface State {
 
 export const defaultState: State = {
   makeProjects: {
+    // @ts-ignore
     form: {
       projectIdentification: {
-        projectCharacterization: {
-          title: 'Sem título',
-          coreTheme: 'Água e Floresta',
-          projectNumber: 'd',
-          typeOfDemand: 'Induzida',
-          typeOfProject: 'Novo'
-        }
+        projectCharacterization: {},
+        geographicLocation: {},
+        clarifications: {},
+        environmentalCharacterization: {},
+        projectSummary: {}
       }
     }
   }

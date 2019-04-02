@@ -1,8 +1,10 @@
 import React from 'react'
-import { DashboardComponent } from './Dashboard';
+import { DashboardProjectIdentificationComponent } from './Dashboard';
+import { ContentProjectIdentification } from './Content';
 
 export const ProjectIdentification = () => (
   <div className="project-identification">
-    <DashboardComponent></DashboardComponent>
+    <DashboardProjectIdentificationComponent />
+    <ContentProjectIdentification />
   </div>
 )

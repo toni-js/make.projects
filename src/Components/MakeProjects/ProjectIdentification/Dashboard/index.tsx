@@ -1,9 +1,18 @@
 import React from 'react'
-import { Switch, Route } from "react-router";
-import { ProjectCharacterizationComponent } from '../ProjectCharacterization';
+import { Link } from 'react-router-dom';
 
-export const DashboardComponent = () => (
-  <Switch>
-    <Route path='/make-projects/project-identification/project-charactrerization' component={ProjectCharacterizationComponent} />
-  </Switch>
+export const DashboardProjectIdentificationComponent = () => (
+  <div className='dashboard-project-identification'>
+    <ul>
+      <li>
+        <Link to='/make-projects/project-identification/project-charactrerization'>Caracterização do projeto</Link>
+      </li>
+      <li>
+        <Link to='/make-projects/project-identification/geographic-location'>Localização Geográfica</Link>
+      </li>
+      <li>
+        <Link to='/make-projects/project-identification/environmental-characterization'>Caracterização Ambiental</Link>
+      </li>
+    </ul>
+  </div>
 )

@@ -1,0 +1,14 @@
+.make-projects
+  display grid
+  grid-template-areas:
+  "dashboard-make-projects title-project"\
+  "dashboard-make-projects content-make-projects"\
+  "dashboard-make-projects content-make-projects"
+  grid-auto-columns: 1fr 3fr
+  & > .container-make-projects
+    grid-area content-make-projects
+    max-width 95%
+  & > .title-project
+    grid-area title-project
+  & > .dashboard-make-projects
+    grid-area dashboard-make-projects

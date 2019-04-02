@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { State, defaultState } from '../../Store';
 
-const TitleMakeProjectsComponent = ( { title }: { title: string } ) => (
-  <h1>{title}</h1>
+const TitleMakeProjectsComponent = ( { title }: { title?: string } ) => (
+  <div className="title-project">
+    <h1>{title}</h1>
+  </div>
 )
 export const TitleMakeProjectsContainer = connect( (state: State = defaultState) => {
   console.log( state )

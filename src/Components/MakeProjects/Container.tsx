@@ -1,31 +1,15 @@
 import React from 'react'
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
-import { ProjectCharacterizationContainer } from './ProjectIdentification/ProjectCharacterization';
+import { ProjectIdentification } from './ProjectIdentification';
 
 const ContainerMakeProjectsComponent = () => (
-  <Switch>
-    <Route path='/make-projects/project-identification' component={ProjectCharacterizationContainer}></Route>
-    <Route path='/make-projects/'></Route>
-    {/** <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>
-    <Route path='/make-projects/'></Route>*/}
-  </Switch>
+  <div className='container-make-projects'>
+    <Switch>
+      <Route path='/make-projects/project-identification' component={ProjectIdentification}/>
+      <Route path='/make-projects'/>
+    </Switch>
+  </div>
 )
 
 export const ContainerMakeProjectsContainer = connect()(ContainerMakeProjectsComponent)

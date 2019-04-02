@@ -2,12 +2,16 @@ import React from 'react'
 import { TypeOfDemand, State } from "../../../Store";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
-const DashboardComponent = ( {typeOfDemand}:{typeOfDemand:TypeOfDemand} ) => (
-  <div>
+import { DashboardProjectIdentificationComponent } from '../ProjectIdentification/Dashboard';
+import './Dashboard.styl'
+const DashboardComponent = ( {typeOfDemand}:{typeOfDemand?:TypeOfDemand} ) => (
+  <div className="dashboard-make-projects">
     <ul>
       <li>
         <Link to='/make-projects/project-identification'>Identificação do Projeto</Link>
+        <div className='sub-dash'>
+          <DashboardProjectIdentificationComponent />
+        </div>
       </li>
       <li>
         <Link to='/make-projects/project-coordination'>Coordenação do Projeto</Link>
