@@ -13,6 +13,12 @@ export const DashboardProjectIdentificationComponent = () => (
       <li>
         <Link to='/make-projects/project-identification/environmental-characterization'>Caracterização Ambiental</Link>
       </li>
+      <li>
+        <Link to='/make-projects/project-identification/project-summary'>Resumo do Projeto</Link>
+      </li>
+      <li>
+        <Link to='/make-projects/project-identification/clarifications'>Esclarecimentos</Link>
+      </li>
     </ul>
   </div>
 )

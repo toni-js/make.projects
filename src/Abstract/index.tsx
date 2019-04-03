@@ -1,5 +1,5 @@
 export const set: ( path: string, value: any, object: { [ key: string ]: any } ) => any = (path, value, object = {}) => {
-  const setPath: ( path: string[], value: any, object: { [ key: string ]: any } ) => any = ([key, ...next], value, object) => ({ ...object, [ key ]: next.length ? setPath(next, value, object[key]) : value })
+  const setPath: ( path: string[], value: any, object: { [ key: string ]: any } ) => any = ([key, ...next], value, object) => Array.isArray( object ) ? object.map( ( item, index ) => index == key ? setPath(next, value, item) : item ) : ({ ...object, [key]: next.length ? setPath(next, value, object[key]) : value })
   return setPath(path.split(/\./gi), value, object)
 }
 

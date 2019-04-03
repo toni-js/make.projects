@@ -46,11 +46,12 @@ export const mapCountiesToFedetalUnitysComplete: {[ key: string ]: string[]} = {
   ['Sergipe']: [],
   ['Tocantins']: [],
 }
-export type Ecosystem = 'Amazônia' | 'Caating' | 'Pampa' | 'Cerrado' | 'Mata Atlântica' | 'Pantanal' | 'Zona Costeira e Marinha'
-export const listOfEcosystems: Array<Ecosystem> = ['Amazônia', 'Caating', 'Cerrado', 'Mata Atlântica', 'Pampa', 'Pantanal', 'Zona Costeira e Marinha']
+export type Ecosystem = 'Amazônia' | 'Catinga' | 'Pampa' | 'Cerrado' | 'Mata Atlântica' | 'Pantanal' | 'Zona Costeira e Marinha'
+export const listOfEcosystems: Array<Ecosystem> = ['Amazônia', 'Catinga', 'Cerrado', 'Mata Atlântica', 'Pampa', 'Pantanal', 'Zona Costeira e Marinha']
 export type Physiognomy = 'Banhados e áreas úmidas' | 'Caating arbórea' | 'Caatinga arbustiva' | 'Caatinga arbustiva-arbórea' | 'Campinarana' | 'Campo' | 'Campo cerrado' | 'Campo chaquento' | 'Campo gramíneo-lenhoso' | 'Campo limpo' | 'Campo salino' | 'Cerradão' | 'Campo sujo' | 'Cerrado senso estrito' | 'Chaco' | 'Costão rochoso' | 'Duna' | 'Estuário' | 'Falésia' | 'Floresta estacional chaquenha' | 'Floresta estacional decidual' | 'Floresta estacional semidecidual' | 'Floresta ombrófila aberta' | 'Floresta ombrófila densa' | 'Floresta ombrófila mista' | 'Lagoa costeira' | 'Manguezal' | 'Mar territorial' | 'Marisma' | 'Mata ciliar' | 'Praia arenosa' | 'Recife de coral' | 'Restinga' | 'Veredas' | 'Zona econômica exclusiva' | 'Área de tensão ecológica' | 'Formação pioneira' | 'Rios e lagos' | 'Savana' | 'Savana estépica' | 'Campo de altitude' | 'Campo rupeste' | 'Vegetação secundária' | 'Campo arbóreo aberto'
 export const listOfPhysiognomy: Array<Physiognomy> = ['Banhados e áreas úmidas','Caating arbórea','Caatinga arbustiva','Caatinga arbustiva-arbórea','Campinarana','Campo','Campo cerrado','Campo chaquento','Campo gramíneo-lenhoso','Campo limpo','Campo salino','Cerradão','Campo sujo','Cerrado senso estrito','Chaco','Costão rochoso','Duna','Estuário','Falésia','Floresta estacional chaquenha','Floresta estacional decidual','Floresta estacional semidecidual','Floresta ombrófila aberta','Floresta ombrófila densa','Floresta ombrófila mista','Lagoa costeira','Manguezal','Mar territorial','Marisma','Mata ciliar','Praia arenosa','Recife de coral','Restinga','Veredas','Zona econômica exclusiva','Área de tensão ecológica','Formação pioneira','Rios e lagos','Savana','Savana estépica','Campo de altitude','Campo rupeste','Vegetação secundária','Campo arbóreo aberto']
 export type HydrographicRegion = 'Amazônica' | 'Tocantins-Araguaia' | 'Paraguai' | 'Paraná' | 'São Francisco' | 'Uruguai' | 'Atlântico Nodeste Ocidental' | 'Atlântico Nordeste Oriental' | 'Paranaíba' | 'Atlântico Leste' | 'Atlântico Sudeste' | 'Atlântico Sul'
+export const listOfHydrographicRegion: Array<HydrographicRegion> = ['Amazônica', 'Atlântico Leste', 'Atlântico Nodeste Ocidental', 'Atlântico Nordeste Oriental', 'Atlântico Sudeste', 'Atlântico Sul', 'Paraguai', 'Paranaíba', 'Paraná', 'São Francisco', 'Tocantins-Araguaia', 'Uruguai']
 export type TypeOfPopulation = 'Adolescentes' | 'Artesãos' | 'Assentados Rurais' | 'Catadores de Caranguejos' | 'Catadores de Materiais Recicláveis' | 'Crianças' | 'Extrativistas' | 'Indígenas' | 'Marisqueiros' | 'Moradores de Área da influência' | 'Moradores de Entrno de Unidade' | 'Ostreiros' | 'Pescadores' | 'Quilombolas' | 'Ribeirinhos' | 'Trabalhadores Rurais' | 'Universitários' | 'Outros'
 export type ExpenseElement = 'Diárias' | 'Material de Consumo' | 'Passagens/Despesas com Locomoção' | 'Outros Serviços de Terceiros - Pessoa Física' | 'Outros Serviços de Terceiros - Pessoa Jurídica' | 'Equipamentos/Material Permanente' | 'Obras e Instalações'
 export type NatureOfExpenditure = 'Despesas Correntes' | 'Despesas de Capital'
@@ -86,9 +87,11 @@ export interface EnvironmentalCharacterization extends EnvironmentalCharacteriza
 interface ProjectSummary_ProjectIdentification_Form_MakeProjects{
   projectSummary?: string,
 }
+export interface ProjectSummary extends ProjectSummary_ProjectIdentification_Form_MakeProjects{}
 interface Clarifications_ProjectIdentification_Form_MakeProjects{
   clarificationsOfTheInstitution?: string
 }
+export interface ProjectClarifications extends Clarifications_ProjectIdentification_Form_MakeProjects{}
 interface ProjectIdentification_Form_MakeProjects {
   projectCharacterization: ProjectCharacterization_ProjectIdentification_Form_MakeProjects,
   geographicLocation: GeographicLocation_ProjectIdentification_Form_MakeProjects,
@@ -212,13 +215,13 @@ interface PresentationOfTheInstitutions_Form_MakeProjects{
 }
 
 interface Diagnosis_Form_MakeProjects{
-  diagnosis: string,
+  diagnosis?: string,
 }
-
+export interface Diagnosis extends Diagnosis_Form_MakeProjects{}
 interface Justification_Form_MakeProjects{
   justificationForTheDevelopmentOfTheProject: string
 }
-
+export interface Justification extends Justification_Form_MakeProjects{}
 interface PopulationDirectlyInvolved_Form_MakeProjects{
   populationIdentification: {
     listOfPopulationCategories: Array<{
@@ -365,8 +368,12 @@ export const defaultState: State = {
         geographicLocation: {},
         clarifications: {},
         environmentalCharacterization: {},
-        projectSummary: {}
-      }
+        projectSummary: {
+          projectSummary: ''
+        }
+      },
+      diagnosis:{},
+      justification:{}
     }
   }
 }
