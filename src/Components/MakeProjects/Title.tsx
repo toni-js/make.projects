@@ -4,7 +4,7 @@ import { State, defaultState } from '../../Store';
 
 const TitleMakeProjectsComponent = ( { title }: { title?: string } ) => (
   <div className="title-project">
-    <h1>{title}</h1>
+    <h1>{title ? `Título do Projeto: ${title}` : 'Projeto sem Título'}</h1>
   </div>
 )
 export const TitleMakeProjectsContainer = connect( (state: State = defaultState) => {

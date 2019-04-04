@@ -5,9 +5,9 @@ import { GeographicLocationContainer } from '../GeographicLocation';
 import { EnvironmentalCharacterizationContainer } from '../EnvironmentalCharacterization';
 import { ProjectSummaryContainer } from '../ProjectSummary';
 import { ClarificationsContainer } from '../Clarifications';
-
+import './index.styl'
 export const ContentProjectIdentification = () => (
-  <div>
+  <div className="content-of-project-identification">
     <Switch>
       <Route path='/make-projects/project-identification/project-charactrerization' exact={true} component={ProjectCharacterizationContainer} />
       <Route path='/make-projects/project-identification/geographic-location' exact={true} component={GeographicLocationContainer} />

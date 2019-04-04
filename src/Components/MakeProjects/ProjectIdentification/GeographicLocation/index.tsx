@@ -1,9 +1,9 @@
 import React, { ChangeEvent } from 'react'
 import { State, GeographicLocation, listOfEnvironments, mapDetailsToEnvironments, TypesOfEnvironments, federationUnitysCompletes, mapCountiesToFedetalUnitysComplete, FederationUnityComplete } from '../../../../Store';
 import { connect } from 'react-redux';
-import { FieldEvent, incrementField, addField } from '../../../../Actions/FacaProjetos';
+import { FieldEvent, incrementField, addField, ActionsList } from '../../../../Actions/FacaProjetos';
 import { BrasilMapContainerForGraphicLocationContainer } from './BrasilMapContainerForGraphicLocation';
-const GeographicLocationComponent = ({ typesOfEnvironments, details, incrementField, federationUnity, counties, filter, addField, places, geographicalCoordinates }: GeographicLocation & { incrementField?: (event: ChangeEvent<HTMLInputElement>) => void, addField?: (event: ChangeEvent<HTMLInputElement>) => void }) => (
+const GeographicLocationComponent = ({ typesOfEnvironments, details, incrementField, federationUnity, counties, filter, addField, places, geographicalCoordinates }: GeographicLocation & ActionsList ) => (
   <div className='grographic-location'>
     <h2>Ambiente de Atuação</h2>
     <div className='row'>
@@ -82,7 +82,7 @@ const GeographicLocationComponent = ({ typesOfEnvironments, details, incrementFi
         </label>
         <label>
           Coordenadas Geográficas:
-          <input type="text" name="geographical-coordinates" value={places} onChange={addField}/>
+          <input type="text" name="geographical-coordinates" value={geographicalCoordinates} onChange={addField}/>
         </label>
       </div>
     </div>
@@ -100,7 +100,7 @@ export const GeographicLocationContainer = connect(
     geographicalCoordinates: state.makeProjects.form.projectIdentification.geographicLocation.geographicalCoordinates || ''
   }),
   dispatch => ({
-    incrementField: (event: FieldEvent) => dispatch(incrementField(event, 'makeProjects.form.projectIdentification.geographicLocation')),
+    incrementField: (event: FieldEvent) => dispatch(incrementField(event.currentTarget.name, event.currentTarget.value, 'makeProjects.form.projectIdentification.geographicLocation')),
     addField: (event: FieldEvent) => dispatch(addField(event.currentTarget.name, event.currentTarget.value, 'makeProjects.form.projectIdentification.geographicLocation')),
   })
 )(GeographicLocationComponent)

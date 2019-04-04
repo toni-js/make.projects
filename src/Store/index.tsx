@@ -68,6 +68,7 @@ interface ProjectCharacterization_ProjectIdentification_Form_MakeProjects{
   projectNumber?: string,
   typeOfProject?: TypeOfProject
 }
+export interface ProjectCharacterization extends ProjectCharacterization_ProjectIdentification_Form_MakeProjects{}
 interface GeographicLocation_ProjectIdentification_Form_MakeProjects{
   typesOfEnvironments?: TypesOfEnvironments,
   details?: string[],

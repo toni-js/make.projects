@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
+import './index.styl'
 export const DashboardProjectIdentificationComponent = () => (
   <div className='dashboard-project-identification'>
     <ul>
